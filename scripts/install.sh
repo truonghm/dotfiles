@@ -27,7 +27,7 @@ install wget
 install make
 install tree
 install fzf
-
+fonts-cascadia-code
 
 
 # Run all scripts in programs/
