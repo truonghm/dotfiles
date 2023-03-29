@@ -2,10 +2,11 @@
 
 echo "🚩🚩🚩 Installing Python/Miniconda3"
 
-PYTHON_VERSION=39
-CONDA_VERSION=4.12.0
-CONDA_PYTHON_VERSION="$PYTHON_VERSION"_"$CONDAVERSION"
-FILE=Miniconda3-py"$CONDA_PYTHON_VERSION"-Linux-x86_64.sh
+# PYTHON_VERSION=py39
+# CONDA_VERSION=4.12.0
+CONDA_PYTHON_VERSION="latest"
+FILE=Miniconda3-"$CONDA_PYTHON_VERSION"-Linux-x86_64.sh
+
 cd /tmp
 if [ -f "$FILE" ]; then
     echo "$FILE already exists."
