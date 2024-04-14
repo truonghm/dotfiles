@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 
-echo "🚩🚩🚩 Installing Hugo"
+echo "🚩🚩🚩 Installing Mamba"
 
 cd /tmp
 

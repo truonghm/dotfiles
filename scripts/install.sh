@@ -38,19 +38,39 @@ install p7zip-full
 install p7zip-rar
 install tilix
 install vlc
+install graphviz
+install psensor
+install openssh-server
+install thunderbird
+
 # install googler
 # install ncdu
 # install nnn
 # https://github.com/sharkdp/bat
 # install bat
-
+# azure-cli
+# studio3T: https://studio3t.com/knowledge-base/articles/how-to-install-studio-3t-on-linux/
+# birdtray
+# inkscape
+# minikube
+# obs-studio
+# zoom
 
 # Run all scripts in programs/
 for f in programs/*.sh; do bash "$f" -H; done
 
+
+# Other snap packages
+sudo snap install datagrip --classic
+sudo snap install slack
+sudo snap install gitkraken --classic
+sudo snap install kolourpaint
+sudo snap install whatsapp-for-linux
+
 # Get all upgrades
 sudo apt upgrade -y
 sudo apt autoremove -y
+sudo systemctl enable --now ssh 
 
 # Limit asus laptop battery threshold
 # For other laptops, explore the power_supply folder to see what is there

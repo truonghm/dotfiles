@@ -9,7 +9,7 @@ export ZSH="$HOME/.oh-my-zsh"
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 # ZSH_THEME="af-magic"
-ZSH_THEME="spaceship"
+ZSH_THEME="ys_python"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -72,10 +72,18 @@ ZSH_THEME="spaceship"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-    git 
+    gitfast
+    kubectl
+    mongo-atlas
+    fzf
     zsh-autosuggestions
     zsh-syntax-highlighting
     sudo
+    colorize
+    copypath
+    copyfile
+    docker
+    docker-compose
     )
 
 source $ZSH/oh-my-zsh.sh
@@ -105,16 +113,76 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+
+# start ssh-agent
+# eval "$(ssh-agent -s)"
+
+# Check if Tailscale is up
+tailscale_status="$(tailscale status)"
+
+if [[ "$tailscale_status" == "Tailscale is stopped." ]]; then
+
+  echo "Tailscale is currently down!"
+else
+  echo "Tailscale is currently up!"
+fi
+
+# aliases
 alias home="cd ~"
-alias conda="source $HOME/miniconda3/bin/activate"
+alias ac="source $HOME/miniconda3/bin/activate"
 alias conda38="source $HOME/miniconda3/bin/activate py38"
 alias conda310="source $HOME/miniconda3/bin/activate py310"
 alias conda37="source $HOME/miniconda3/bin/activate py37"
-alias sp="spotifyd && spt"
-alias ksp="pkill spotifyd"
 alias wttr="curl wttr.in/Hanoi"
 alias tf="tree -L 2"
-alias reset_sound="systemctl --user --now disable pulseaudio.service pulseaudio.socket && systemctl --user restart pipewire pipewire-pulse"
+alias lzd="lazydocker"
+alias pipc="/home/truonghm/miniconda3/envs/pip-base/bin/python -m piptools compile"
+alias pips="/home/truonghm/miniconda3/envs/pip-base/bin/python -m piptools sync"
+alias lpf="python -m http.server 1719"
+alias tsu="sudo tailscale up --exit-node=singapore-node --exit-node-allow-lan-access --reset"
+alias tsue="sudo tailscale up --exit-node=europe-node --exit-node-allow-lan-access --reset"
+alias tsd="sudo tailscale down"
+alias tss="tailscale status"
+alias gitc="git commit --no-verify -m"
+alias gitcv="git commit -m"
+alias fuckit="git symbolic-ref HEAD refs/head/development && git reset --hard"
+alias avenv="source .venv/bin/activate"
+
+function gitss {
+    local stashName="$1"
+
+    # Check if there are any staged changes
+    if git diff --cached --quiet && git ls-files --others --exclude-standard --directory --no-empty-directory --quiet; then
+        echo "No staged changes to stash."
+        return 1
+    fi
+
+    # Stash the changes with the provided stash name
+    if ! git stash push --keep-index -m "$stashName"; then
+        echo "Failed to stash changes."
+        return 1
+    fi
+
+    # Get a list of all staged files, both tracked and untracked
+    staged_files=$(git status --porcelain | awk '{if ($1 == "A" || $1 == "M") print $2}')
+
+    if [ -z "$staged_files" ]; then
+        echo "No files were staged."
+        return 1
+    fi
+
+    # Read the staged files line by line
+    echo "$staged_files" | while IFS= read -r file; do
+        echo "Unstaging and reverting changes in $file"
+        git reset HEAD "$file"  # Unstage the file
+        if git ls-files --error-unmatch "$file" > /dev/null 2>&1; then
+            git checkout -- "$file"  # Revert changes for tracked files
+        else
+            rm "$file"  # Remove the file if it was untracked
+        fi
+    done
+}
+
 
 # keybinding
 bindkey '^I'   complete-word       # tab -> complete
@@ -134,17 +202,12 @@ fi
 
 # change color
 export TERM=xterm-256color
-
-export SPARK_HOME=/home/truonghm/spark-3.1.1-amzn-0-bin-3.2.1-amzn-3
-
 export PATH="${PATH}:${HOME}/.local/bin"
-export JAVA_HOME=${SDKMAN_CANDIDATES_DIR}/java/${CURRENT}
-export SDKMAN_DIR="$HOME/.sdkman"
-[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
-export PATH="$PATH:$HOME/.dotnet/tools"
-export DOTNET_ROOT=/snap/dotnet-sdk/current
-# export MSBuildSDKsPath=$DOTNET_ROOT/sdk/$(${DOTNET_ROOT}/dotnet --version)/Sdks
-export PATH="${PATH}:${DOTNET_ROOT}"
-export PATH="$PATH:$HOME/.dotnet/tools"
-export PATH=/usr/local/cuda-12.0/bin${PATH:+:${PATH}}
-export LD_LIBRARY_PATH=/usr/local/cuda-12.0/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
+export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/src"
+
+# Load Angular CLI autocompletion.
+# source <(ng completion script)
+
+# Scripts
+export PATH="$HOME/scripts:$PATH"
+. "$HOME/.cargo/env"
