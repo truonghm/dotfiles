@@ -20,7 +20,7 @@ function install {
 }
 
 # Create temp folder to store installation files
-sudo mkdir tmp
+sudo mkdir tmp || true
 
 # Basics
 install awscli
