@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 
 cp -r $(pwd)/.config ${HOME}
 cp -r $(pwd)/.fonts ${HOME}

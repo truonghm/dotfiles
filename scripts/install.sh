@@ -1,10 +1,9 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
+
+set -e
 
 # Copy dotfiles
-bash copy.sh
-
-# Create temp folder to store installation files
-sudo mkdir tmp
+bash $(pwd)/scripts/copy.sh
 
 # Update Ubuntu and get standard repository programs
 sudo apt update && sudo apt full-upgrade -y
@@ -19,6 +18,9 @@ function install {
     echo "Already installed: ${1}"
   fi
 }
+
+# Create temp folder to store installation files
+sudo mkdir tmp
 
 # Basics
 install awscli
