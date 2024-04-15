@@ -1,12 +1,10 @@
 #!/usr/bin/env bash
 
-set -e
-
 # Copy dotfiles
 bash $(pwd)/scripts/copy.sh
 
 # Update Ubuntu and get standard repository programs
-sudo apt update && sudo apt full-upgrade -y
+# sudo apt update && sudo apt full-upgrade -y
 
 function install {
   which $1 &> /dev/null
@@ -44,6 +42,7 @@ install graphviz
 install psensor
 install openssh-server
 install thunderbird
+install jq
 
 # install googler
 # install ncdu
@@ -59,7 +58,7 @@ install thunderbird
 # zoom
 
 # Run all scripts in programs/
-for f in programs/*.sh; do bash "$f" -H; done
+for f in $(pwd)/scripts/programs/*.sh; do bash "$f" -H; done
 
 
 # Other snap packages

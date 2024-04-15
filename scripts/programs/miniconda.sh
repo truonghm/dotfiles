@@ -17,9 +17,9 @@ fi
 bash "$FILE" -b -p $HOME/miniconda3
 
 # create environment and install packages
-source $HOME/miniconda3/bin/activate
+# source $HOME/miniconda3/bin/activate
 
-conda create --yes --name=py38 python=3.8
-conda activate py38
+# conda create --yes --name=py38 python=3.8
+# conda activate py38
 
-pip install --no-input numpy pandas scikit-learn matplotlib seaborn jupyter python-dotenv scipy joblib statsmodels altair streamlit
+# pip install --no-input numpy pandas scikit-learn matplotlib seaborn jupyter python-dotenv scipy joblib statsmodels altair streamlit

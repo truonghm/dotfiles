@@ -12,4 +12,4 @@ sudo chmod 644 /etc/apt/keyrings/lens-archive-keyring.gpg
 echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/lens-archive-keyring.gpg] https://downloads.k8slens.dev/apt/debian stable main" | sudo tee /etc/apt/sources.list.d/lens.list > /dev/null
 
 sudo apt update
-sudo apt install lens
+sudo apt install lens -y
