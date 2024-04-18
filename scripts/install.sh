@@ -43,6 +43,9 @@ install psensor
 install openssh-server
 install thunderbird
 install jq
+install gnome-shell-extension-manager
+install neofetch
+install geany
 
 # install googler
 # install ncdu
