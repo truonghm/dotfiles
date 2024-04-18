@@ -66,7 +66,7 @@ for f in $(pwd)/scripts/programs/*.sh; do bash "$f" -H; done
 
 # Other snap packages
 sudo snap install datagrip --classic
-sudo snap install slack
+# sudo snap install slack
 sudo snap install gitkraken --classic
 sudo snap install kolourpaint
 sudo snap install whatsapp-for-linux
