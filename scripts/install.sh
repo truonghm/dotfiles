@@ -41,7 +41,6 @@ install vlc
 install graphviz
 install psensor
 install openssh-server
-install thunderbird
 install jq
 install gnome-shell-extension-manager
 install neofetch
@@ -61,7 +60,7 @@ install geany
 # zoom
 
 # Run all scripts in programs/
-for f in $(pwd)/scripts/programs/*.sh; do bash "$f" -H; done
+# for f in $(pwd)/scripts/programs/*.sh; do bash "$f" -H; done
 
 
 # Other snap packages
