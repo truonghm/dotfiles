@@ -195,9 +195,9 @@ export FONTCONFIG_PATH=/etc/fonts
 
 
 # fix issue with tilix
-if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
-        source /etc/profile.d/vte.sh
-fi
+# if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
+#         source /etc/profile.d/vte.sh
+# fi
 
 
 # change color
@@ -211,3 +211,5 @@ export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/src"
 # Scripts
 export PATH="$HOME/scripts:$PATH"
 . "$HOME/.cargo/env"
+
+export VIRTUAL_ENV_DISABLE_PROMPT=1

@@ -15,7 +15,7 @@ else
 fi
 
 bash "$FILE" -b -p $HOME/miniconda3
-
+source $HOME/miniconda3/bin/activate; conda config --set changeps1 False
 # create environment and install packages
 # source $HOME/miniconda3/bin/activate
 
