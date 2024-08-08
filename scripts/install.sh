@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
 
-# Copy dotfiles
-bash $(pwd)/scripts/copy.sh
-
 # Update Ubuntu and get standard repository programs
 # sudo apt update && sudo apt full-upgrade -y
 
@@ -45,6 +42,9 @@ install jq
 install gnome-shell-extension-manager
 install neofetch
 install geany
+install tlp
+install tlp-rdw
+install gnome-tweaks
 
 # install googler
 # install ncdu
@@ -60,20 +60,23 @@ install geany
 # zoom
 
 # Run all scripts in programs/
-# for f in $(pwd)/scripts/programs/*.sh; do bash "$f" -H; done
+for f in $(pwd)/scripts/programs/*.sh; do bash "$f" -H; done
 
 
 # Other snap packages
-sudo snap install datagrip --classic
+# sudo snap install datagrip --classic
 # sudo snap install slack
-sudo snap install gitkraken --classic
-sudo snap install kolourpaint
-sudo snap install whatsapp-for-linux
+# sudo snap install gitkraken --classic
+# sudo snap install kolourpaint
+# sudo snap install whatsapp-for-linux
 
 # Get all upgrades
 sudo apt upgrade -y
 sudo apt autoremove -y
 sudo systemctl enable --now ssh 
+
+# Copy dotfiles
+bash $(pwd)/scripts/copy.sh
 
 # Limit asus laptop battery threshold
 # For other laptops, explore the power_supply folder to see what is there
