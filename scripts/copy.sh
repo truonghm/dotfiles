@@ -5,3 +5,4 @@ cp -r $(pwd)/.fonts ${HOME}
 
 cp $(pwd)/profiles/.zshrc ${HOME}
 cp $(pwd)/profiles/.vimrc ${HOME}
+cp $(pwd)/profiles/tlp.conf /etc/tlp.conf
